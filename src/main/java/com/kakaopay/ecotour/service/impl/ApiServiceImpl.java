@@ -44,8 +44,8 @@ public class ApiServiceImpl implements ApiService {
 	@Value("${init.csv.file}")
 	private String csvFile;
 	
-	@PostConstruct
-	private void importCsvFile() {
+	@Override
+	public void init() {
 		String loc = null;
 		List<PostProgramRequestBody> bodys = new ArrayList<>(); 
 		try {

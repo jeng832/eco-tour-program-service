@@ -35,7 +35,7 @@ public class ApiController {
 	private Logger logger = LoggerFactory.getLogger(ApiController.class);
 	
 	@Autowired
-	ApiService progMgmtService;
+	ApiService apiService;
 	
     @RequestMapping(value="/health", method=RequestMethod.GET)
     @ResponseBody
@@ -43,6 +43,14 @@ public class ApiController {
     	logger.info("Health Checking");
         return ResponseEntity.ok().build();
     }
+    @RequestMapping(value="/init", method=RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<?> getProgram() {
+    	logger.info("init csv file");
+    	apiService.init();
+        return ResponseEntity.ok().build();
+    }
+    
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = "X-AUTH-TOKEN", required = true, dataType = "String", paramType = "header")
 	})
@@ -50,7 +58,7 @@ public class ApiController {
     @ResponseBody
     public ResponseEntity<GetProgramResponseBody> getProgram(@PathVariable @Valid Long progId) {
     	logger.info("getProgram id: " + progId);
-    	GetProgramResponseBody body = progMgmtService.getProgram(progId);
+    	GetProgramResponseBody body = apiService.getProgram(progId);
         return new ResponseEntity<GetProgramResponseBody>(body, HttpStatus.OK);
     }
 	@ApiImplicitParams({
@@ -60,7 +68,7 @@ public class ApiController {
     @ResponseBody
     public ResponseEntity<List<GetProgramResponseBody>> getProgramByRegionCode(@PathVariable @Valid Long regionCode) {
     	logger.info("getProgramByRegionCode id: " + regionCode);
-    	List<GetProgramResponseBody> body = progMgmtService.getProgramByRegionCode(regionCode);
+    	List<GetProgramResponseBody> body = apiService.getProgramByRegionCode(regionCode);
         return new ResponseEntity<List<GetProgramResponseBody>>(body, HttpStatus.OK);
     }
 	@ApiImplicitParams({
@@ -70,7 +78,7 @@ public class ApiController {
     @ResponseBody
     public ResponseEntity<List<GetProgramByRegionNameResponseBody>> getProgramByRegionName(@RequestBody @Valid GetProgramByRegionNameRequestBody request) {
     	logger.info("getProgramByRegionName body: " + request.toString());
-    	List<GetProgramByRegionNameResponseBody> bodys = progMgmtService.getProgramByRegionName(request.getRegion());
+    	List<GetProgramByRegionNameResponseBody> bodys = apiService.getProgramByRegionName(request.getRegion());
     	return new ResponseEntity<List<GetProgramByRegionNameResponseBody>>(bodys, HttpStatus.OK);
     }
 	@ApiImplicitParams({
@@ -80,7 +88,7 @@ public class ApiController {
     @ResponseBody
     public ResponseEntity<?> postProgram(@RequestBody @Valid PostProgramRequestBody requestBody) {
     	logger.info("postProgram requestBody: " + requestBody.toString());
-    	progMgmtService.postProgram(requestBody);
+    	apiService.postProgram(requestBody);
         return ResponseEntity.ok().build();
     }
 	@ApiImplicitParams({
@@ -90,7 +98,7 @@ public class ApiController {
     @ResponseBody
     public ResponseEntity<?> putProgram(@PathVariable @Valid Long progId, @RequestBody @Valid PostProgramRequestBody requestBody) {
     	logger.info("putProgram progId: " + progId + ", requestBody: "+ requestBody);
-    	progMgmtService.putProgram(progId, requestBody);
+    	apiService.putProgram(progId, requestBody);
         return ResponseEntity.ok().build();
     }
 	@ApiImplicitParams({
@@ -100,7 +108,7 @@ public class ApiController {
     @ResponseBody
     public ResponseEntity<?> deleteProgram(@PathVariable @Valid Long progId) {
     	logger.info("deleteProgram progId: "+ progId);
-    	progMgmtService.deleteProgram(progId);
+    	apiService.deleteProgram(progId);
         return ResponseEntity.ok().build();
     }
     
@@ -112,7 +120,7 @@ public class ApiController {
     @ResponseBody
     public ResponseEntity<GetCountProgramFromIntroResponseBody> getCountProgramFromIntro(@RequestBody @Valid GetCountRequestBody request) {
     	logger.info("getCountProgramFromIntro body: " + request.toString());
-    	GetCountProgramFromIntroResponseBody body = progMgmtService.getCountProgramFromIntro(request.getKeyword());
+    	GetCountProgramFromIntroResponseBody body = apiService.getCountProgramFromIntro(request.getKeyword());
     	return new ResponseEntity<GetCountProgramFromIntroResponseBody>(body, HttpStatus.OK);
     }
 	@ApiImplicitParams({
@@ -122,7 +130,7 @@ public class ApiController {
     @ResponseBody
     public ResponseEntity<GetCountKeywordFromDescResponseBody> getCountKeywordFromDesc(@RequestBody @Valid GetCountRequestBody request) {
     	logger.info("getCountKeywordFromDesc body: " + request.toString());
-    	GetCountKeywordFromDescResponseBody body = progMgmtService.getCountKeywordFromDesc(request.getKeyword());
+    	GetCountKeywordFromDescResponseBody body = apiService.getCountKeywordFromDesc(request.getKeyword());
     	return new ResponseEntity<GetCountKeywordFromDescResponseBody>(body, HttpStatus.OK);
     }
 	@ApiImplicitParams({
@@ -132,7 +140,7 @@ public class ApiController {
     @ResponseBody
     public ResponseEntity<GetProgramRecommendationResponseBody> getProgramRecommendation(@RequestBody @Valid GetProgramRecommendationRequestBody request) {
     	logger.info("getProgramRecommendation body: " + request.toString());
-    	GetProgramRecommendationResponseBody body = progMgmtService.getProgramRecommendation(request.getKeyword(), request.getRegion());
+    	GetProgramRecommendationResponseBody body = apiService.getProgramRecommendation(request.getKeyword(), request.getRegion());
     	return new ResponseEntity<GetProgramRecommendationResponseBody>(body, HttpStatus.OK);
     }
 	@ApiImplicitParams({
@@ -142,7 +150,7 @@ public class ApiController {
     @ResponseBody
     public ResponseEntity<List<GetProgramRecommendationResponseBody>> getProgramRecommendation(@PathVariable @Valid Integer topK, @RequestBody @Valid GetProgramRecommendationRequestBody request) {
     	logger.info("getProgramRecommendation body: " + request.toString());
-    	List<GetProgramRecommendationResponseBody> body = progMgmtService.getProgramRecommendation(request.getKeyword(), request.getRegion(), topK);
+    	List<GetProgramRecommendationResponseBody> body = apiService.getProgramRecommendation(request.getKeyword(), request.getRegion(), topK);
     	return new ResponseEntity<List<GetProgramRecommendationResponseBody>>(body, HttpStatus.OK);
     }
 }

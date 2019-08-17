@@ -10,6 +10,7 @@ import com.kakaopay.ecotour.model.GetProgramResponseBody;
 import com.kakaopay.ecotour.model.PostProgramRequestBody;
 
 public interface ApiService {
+	void init();
 	List<GetProgramByRegionNameResponseBody> getProgramByRegionName(String regionName);
 	GetCountProgramFromIntroResponseBody getCountProgramFromIntro(String keyword);
 	GetCountKeywordFromDescResponseBody getCountKeywordFromDesc(String keyword);
