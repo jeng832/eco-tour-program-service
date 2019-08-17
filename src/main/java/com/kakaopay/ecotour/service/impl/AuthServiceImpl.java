@@ -1,5 +1,7 @@
 package com.kakaopay.ecotour.service.impl;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -9,6 +11,7 @@ import com.kakaopay.ecotour.exception.TokenRefreshFailedException;
 import com.kakaopay.ecotour.manager.DataManager;
 import com.kakaopay.ecotour.model.auth.GetSignInResponseBody;
 import com.kakaopay.ecotour.model.auth.SignInUserData;
+import com.kakaopay.ecotour.model.auth.TokenType;
 import com.kakaopay.ecotour.provider.JwtTokenProvider;
 import com.kakaopay.ecotour.service.AuthService;
 
@@ -40,14 +43,22 @@ public class AuthServiceImpl implements AuthService {
 	}
 
 	@Override
-	public String refresh(String id, String password) {
-		SignInUserData userData = dataMgr.getUserData(id);
-		
-		if(!passwordEncoder.matches(password, userData.getEncodedPassword())) {
-			throw new TokenRefreshFailedException();
+	public String refresh(String authHeader, String id, String password) {
+		String[] refreshAuthHeader = authHeader.split(" ");
+		String token = null;
+		if(refreshAuthHeader[0].equals("Bearer")) {
+			token = refreshAuthHeader[1];
 		}
-		
-		return jwtTokenProvider.createToken(id, userData.getRoles());
+		if(token != null && jwtTokenProvider.validateToken(TokenType.REFRESH_TOKEN, token)) {
+			SignInUserData userData = dataMgr.getUserData(id);
+			
+			if(!passwordEncoder.matches(password, userData.getEncodedPassword())) {
+				throw new TokenRefreshFailedException();
+			}
+			
+			return jwtTokenProvider.createToken(id, userData.getRoles());
+		}
+		throw new TokenRefreshFailedException();
 	}
 
 }

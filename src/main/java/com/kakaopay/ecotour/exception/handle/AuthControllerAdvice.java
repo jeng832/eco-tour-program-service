@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.kakaopay.ecotour.exception.SignInFailedException;
+import com.kakaopay.ecotour.exception.TokenRefreshFailedException;
 
 @ControllerAdvice
 public class AuthControllerAdvice {
@@ -17,6 +18,13 @@ public class AuthControllerAdvice {
 	protected ResponseEntity<?> handle(SignInFailedException e) {
 		logger.error("Signin Failed", e);
 		ErrorMessage em = new ErrorMessage(HttpStatus.FORBIDDEN, "Signin Failed");	
+		return ResponseEntity.status(HttpStatus.FORBIDDEN).body(em);	
+	}
+	
+	@ExceptionHandler(TokenRefreshFailedException.class)
+	protected ResponseEntity<?> handle(TokenRefreshFailedException e) {
+		logger.error("Signin Failed", e);
+		ErrorMessage em = new ErrorMessage(HttpStatus.FORBIDDEN, "Token refresh Failed");	
 		return ResponseEntity.status(HttpStatus.FORBIDDEN).body(em);	
 	}
 }
