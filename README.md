@@ -41,7 +41,11 @@ $ gradlew bootRun
 ## 문제해결 전략
 ### ORM Entity 구조
 ### 추천 알고리즘 개발
+- 초기 idea
+- 발전
+- 문제(복합어 keyword) -> 해결
 ### JWT 활용
+- Access Token / Refresh Token 설명
 ## 발전 방향
 ### 개인화 추천 기능 추가
 - JWT를 통한 인증 및 로그인 기능과 연동하여, 개인의 추천 keyword 내역을 이용한 개인화 추천 알고리즘
