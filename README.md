@@ -37,11 +37,11 @@ $ gradlew bootRun
 - h2database
 - apache-commons
 ### API 
-종류|method|URI|Header|Request Body|Response|Description
-----|------|---|------|------------|-------------|-----------
-Health Check|GET|/health||||Server Health Check
-initialize data|GET|/init||||주어진 CSV파일을 DB에 저장하여 초기화
-program 조회|GET|/program/id/{progId}|X-AUTH-TOKEN||{<br>  "description": "string",<br>  "id": 0,<br>  "introduction": "string",<br>  "name": "string",<br>  "region": "string",<br>  "theme": "string"<br>}|{progId} : program ID<br>X-AUTH-TOKEN: access token
+종류|method|Request URI<br>Header|Request Body|Response|Description
+----|------|-----------|------------|-------------|-----------
+Health Check|GET|/health|||Server Health Check
+initialize data|GET|/init|||주어진 CSV파일을 DB에 저장하여 초기화
+program 조회|GET|/program/id/{progId}<br>X-AUTH-TOKEN:{access token}||{<br>  "description": "string",<br>  "id": 0,<br>  "introduction": "string",<br>  "name": "string",<br>  "region": "string",<br>  "theme": "string"<br>}|{progId} : program ID<br>{access token} : 인증을 통해 획득한 access token
 
 ### Project package 구조
 ```
