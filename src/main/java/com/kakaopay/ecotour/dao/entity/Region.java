@@ -16,15 +16,9 @@ public class Region {
 	@Column(name = "region_name")
 	private String regionName;
 	
-//	@OneToMany(mappedBy = "region", fetch = FetchType.EAGER)
-//	private List<EcoTourProgram> programs;
-	
-	public Region() {
-//		this.programs = new ArrayList<>();
-	}
+	public Region() {}
 	public Region(String region) {
 		this.regionName = region;
-//		this.programs = new ArrayList<>();
 	}
 
 	public Long getCode() {
@@ -49,12 +43,4 @@ public class Region {
 		builder.append("]");
 		return builder.toString();
 	}
-
-//	public List<EcoTourProgram> getPrograms() {
-//		return programs;
-//	}
-//
-//	public void setPrograms(List<EcoTourProgram> programs) {
-//		this.programs = programs;
-//	}
 }

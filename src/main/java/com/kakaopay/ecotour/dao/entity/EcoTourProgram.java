@@ -66,15 +66,7 @@ public class EcoTourProgram {
 		return region;
 	}
 	public void setRegion(Region region) {		
-//		List<EcoTourProgram> progs = region.getPrograms();
-//		for(EcoTourProgram prog : progs) {
-//			if(prog.getRegion().getRegionName().equals(region.getRegionName())) {
-//				this.region = prog.getRegion();
-//				return;
-//			}
-//		}
 		this.region = region;
-//		region.getPrograms().add(this);
 	}
 	public String getIntroduction() {
 		return introduction;
