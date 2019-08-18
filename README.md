@@ -37,6 +37,32 @@ $ gradlew bootRun
 - h2database
 - apache-commons
 ### Project package 구조
+```
+.
+├── java
+│   └── com
+│       └── kakaopay
+│           └── ecotour
+│               ├── config
+│               ├── controller
+│               ├── dao
+│               │   ├── entity
+│               │   └── repository
+│               ├── exception
+│               │   └── handle
+│               ├── filter
+│               ├── manager
+│               │   └── impl
+│               ├── model
+│               │   ├── auth
+│               │   ├── http
+│               │   └── recomm
+│               ├── provider
+│               ├── service
+│               │   └── impl
+│               └── util
+└── resources
+```
 ### Project Block Diagram
 ## 문제해결 전략
 ### ORM Entity 구조
