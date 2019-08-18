@@ -2,12 +2,12 @@ package com.kakaopay.ecotour.service;
 
 import java.util.List;
 
-import com.kakaopay.ecotour.model.GetCountKeywordFromDescResponseBody;
-import com.kakaopay.ecotour.model.GetCountProgramFromIntroResponseBody;
-import com.kakaopay.ecotour.model.GetProgramByRegionNameResponseBody;
-import com.kakaopay.ecotour.model.GetProgramRecommendationResponseBody;
-import com.kakaopay.ecotour.model.GetProgramResponseBody;
-import com.kakaopay.ecotour.model.PostProgramRequestBody;
+import com.kakaopay.ecotour.model.http.GetCountKeywordFromDescResponseBody;
+import com.kakaopay.ecotour.model.http.GetCountProgramFromIntroResponseBody;
+import com.kakaopay.ecotour.model.http.GetProgramByRegionNameResponseBody;
+import com.kakaopay.ecotour.model.http.GetProgramRecommendationResponseBody;
+import com.kakaopay.ecotour.model.http.GetProgramResponseBody;
+import com.kakaopay.ecotour.model.http.PostProgramRequestBody;
 
 public interface ApiService {
 	void init();

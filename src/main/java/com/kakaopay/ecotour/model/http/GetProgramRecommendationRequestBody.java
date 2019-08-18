@@ -1,4 +1,4 @@
-package com.kakaopay.ecotour.model;
+package com.kakaopay.ecotour.model.http;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;

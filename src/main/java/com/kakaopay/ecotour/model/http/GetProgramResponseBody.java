@@ -1,26 +1,21 @@
-package com.kakaopay.ecotour.model;
+package com.kakaopay.ecotour.model.http;
 
-import javax.validation.constraints.NotNull;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class PostProgramRequestBody {
-	@JsonProperty("name")
-	@NotNull
+public class GetProgramResponseBody {
+	private Long id;
 	private String name;
-	@JsonProperty("theme")
-	@NotNull
 	private String theme;
-	@JsonProperty("region")
-	@NotNull
 	private String region;
-	@JsonProperty("introduction")
-	@NotNull
 	private String introduction;
-	@JsonProperty("description")
-	@NotNull
 	private String description;
 	
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
 	public String getName() {
 		return name;
 	}
@@ -53,7 +48,22 @@ public class PostProgramRequestBody {
 	}
 	@Override
 	public String toString() {
-		return "PostProgramRequestBody [name=" + name + ", theme=" + theme + ", region=" + region + ", introduction="
-				+ introduction + ", description=" + description + "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("getProgramRequestBody [id=");
+		builder.append(id);
+		builder.append(", name=");
+		builder.append(name);
+		builder.append(", theme=");
+		builder.append(theme);
+		builder.append(", region=");
+		builder.append(region);
+		builder.append(", introduction=");
+		builder.append(introduction);
+		builder.append(", description=");
+		builder.append(description);
+		builder.append("]");
+		return builder.toString();
 	}
+	
+	
 }

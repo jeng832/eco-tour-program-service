@@ -1,4 +1,4 @@
-package com.kakaopay.ecotour.model;
+package com.kakaopay.ecotour.model.http;
 
 import java.util.ArrayList;
 import java.util.List;

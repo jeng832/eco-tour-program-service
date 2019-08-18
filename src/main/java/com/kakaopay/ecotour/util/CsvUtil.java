@@ -10,7 +10,7 @@ import java.util.List;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
 
-import com.kakaopay.ecotour.model.PostProgramRequestBody;
+import com.kakaopay.ecotour.model.http.PostProgramRequestBody;
 
 public class CsvUtil {
 	public static List<PostProgramRequestBody> readCsv(String location) throws IOException {

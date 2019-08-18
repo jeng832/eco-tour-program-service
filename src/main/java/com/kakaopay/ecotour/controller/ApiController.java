@@ -16,15 +16,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.kakaopay.ecotour.model.GetCountRequestBody;
-import com.kakaopay.ecotour.model.GetCountKeywordFromDescResponseBody;
-import com.kakaopay.ecotour.model.GetCountProgramFromIntroResponseBody;
-import com.kakaopay.ecotour.model.GetProgramByRegionNameRequestBody;
-import com.kakaopay.ecotour.model.GetProgramByRegionNameResponseBody;
-import com.kakaopay.ecotour.model.GetProgramRecommendationRequestBody;
-import com.kakaopay.ecotour.model.GetProgramRecommendationResponseBody;
-import com.kakaopay.ecotour.model.GetProgramResponseBody;
-import com.kakaopay.ecotour.model.PostProgramRequestBody;
+import com.kakaopay.ecotour.model.http.GetCountKeywordFromDescResponseBody;
+import com.kakaopay.ecotour.model.http.GetCountProgramFromIntroResponseBody;
+import com.kakaopay.ecotour.model.http.GetCountRequestBody;
+import com.kakaopay.ecotour.model.http.GetProgramByRegionNameRequestBody;
+import com.kakaopay.ecotour.model.http.GetProgramByRegionNameResponseBody;
+import com.kakaopay.ecotour.model.http.GetProgramRecommendationRequestBody;
+import com.kakaopay.ecotour.model.http.GetProgramRecommendationResponseBody;
+import com.kakaopay.ecotour.model.http.GetProgramResponseBody;
+import com.kakaopay.ecotour.model.http.PostProgramRequestBody;
 import com.kakaopay.ecotour.service.ApiService;
 
 import io.swagger.annotations.ApiImplicitParam;

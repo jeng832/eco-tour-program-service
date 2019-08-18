@@ -10,7 +10,7 @@ import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.io.ClassPathResource;
 
-import com.kakaopay.ecotour.model.PostProgramRequestBody;
+import com.kakaopay.ecotour.model.http.PostProgramRequestBody;
 
 @SpringBootTest
 public class CsvUtilTest {

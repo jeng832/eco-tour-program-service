@@ -1,4 +1,4 @@
-package com.kakaopay.ecotour.model;
+package com.kakaopay.ecotour.model.http;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

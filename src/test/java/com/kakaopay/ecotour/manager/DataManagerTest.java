@@ -9,8 +9,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.kakaopay.ecotour.exception.ProgramIsNotExistException;
-import com.kakaopay.ecotour.model.GetProgramResponseBody;
-import com.kakaopay.ecotour.model.PostProgramRequestBody;
+import com.kakaopay.ecotour.model.http.GetProgramResponseBody;
+import com.kakaopay.ecotour.model.http.PostProgramRequestBody;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
