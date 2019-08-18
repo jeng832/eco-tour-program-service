@@ -73,9 +73,45 @@ initialize data|GET|/init|||200||주어진 CSV파일을 DB에 저장하여 초�
 ## 문제해결 전략
 ### ORM Entity 구조
 ### 추천 알고리즘 개발
-- 초기 idea
-- 발전
-- 문제(복합어 keyword) -> 해결
+#### 최초 아이디어
+##### 알고리즘
+1. 추천의 Source가 되는 theme, introduction, description column에서 입력 keyword count
+2. Column별로 weight를 곱
+3. 각 column값별 weighted count를 합
+##### 문제점
+- 모든 문서에 빈출 단어는 특정 문서의 특징을 반영 불가
+- 문서의 특징보다 단어의 수, 문서의 길이에 의해 영향을 받을 가능성 존재
+##### 해결방법
+- TF-IDF 도입 방법 고려
+#### TF-IDF 활용한 추천 알고리즘
+##### 알고리즘
+- 특정 record의 특정 column의 내용을 문서(document)로 정의
+- 문서에서 추출된 명사를 Term으로 정의
+- 전체 record의 특정 column을 문서군으로 정의
+1. 추천의 Source가 되는 theme, introduction, description column에 대해서 각각 아래 과정을 수행
+    1. 문서군에서 형태소 분석기를 통해 명사(Term)를 추출
+    2. 각 Term이 전체 문서대비 몇개의 문서에 존재하는지 계산 (Document Frequency, DF)
+    3. 각 Term별로 각 문서에 몇번 있는지 확인 (Term Frequency. TF)
+    4. 문서별 개별 Term의 TF-IDF 값 계산
+2. column 별 입력받은 Keyword에 해당하는 TF-IDF 값 추출
+3. 2번의 값에 column별 weight 곱
+4. 3번으로 나온 3개의 weighted TF-IDF를 합
+5. 입력받은 keyword에 해당하는 Weighted TF-IDF 추출
+6. 5번의 Weighted TF-IDF를 내림차순 정렬
+7. 6번의 목록에서 첫번째 문서 추천
+##### 문제점
+- 입력받은 keyword가 복합어(ex: 생태체험) 일 경우, 추천의 Source data는 Term별로 분해(생태 + 체험)가 되어서 추천하지 못하는 문제 발생
+##### 해결방법
+- 입력받은 keyword도 동일한 형태소 분석기로 Term을 추출하여, 개별 Term에 대해서 추천 알고리즘 활용하고 이를 총합하여 추천
+#### TF-IDF 활용한 추천 알고리즘
+##### 알고리즘
+1. 위의 TF-IDF를 이용한 추천 알고리즘 4번 까지 수행
+2. 입력받은 keyword를 형태소 분석
+3. 분석된 Termed keyword에 해당하는 Weighted TF-IDF 추출
+4. 3번으로 나온 3개의 Weighted TF-IDF를 합
+5. 개별 Termed keyword에 대한 4번 값을 총합
+6. 5번의 목록을 내림차순 정렬
+7. 6번의 목록에서 첫번째 문서 추천
 ### JWT 활용
 - Access Token / Refresh Token 설명
 ## 발전 방향
