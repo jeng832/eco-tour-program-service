@@ -36,6 +36,7 @@ $ gradlew bootRun
 - Komoran 형태소 분석기
 - h2database
 - apache-commons
+- swagger
 ### API 
 #### Health Check
 - server health check API
@@ -425,6 +426,7 @@ $ gradlew bootRun
 └── resources                                   // properties 파일, csv파일 등 resource
 ```
 ### Project Block Diagram
+
 ## 문제해결 전략
 ### ORM Entity 구조
 ### 추천 알고리즘 개발
