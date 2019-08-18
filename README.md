@@ -431,7 +431,9 @@ $ gradlew bootRun
 ### ORM Entity 구조
 #### Program과 Region 정보 ER Diagram
 ![Alt text](/md_img/program_erd.jpg)
-```
+- EcoTourProgram의 region과 Region을 @ManyToOne으로 연결
+	- 특정 지역에 여러 Program이 존재 가능하므로
+``` java
 @Entity
 public class EcoTourProgram {
 	@Id
@@ -465,7 +467,7 @@ public class EcoTourProgram {
             
 }
 ```
-```
+``` java
 @Entity
 public class Region {
 	@Id
@@ -480,6 +482,84 @@ public class Region {
 ```
 #### 사용자 정보 ER Diagram
 ![Alt text](/md_img/user_erd.jpg)
+
+``` java
+@Entity
+public class User implements UserDetails {
+
+	private static final long serialVersionUID = 2008055523276541691L;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long idx;
+
+	@Column(nullable = false, unique = true)
+	private String userId;
+	
+	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+	@Column(nullable = false)
+	private String password;
+	
+	@ElementCollection(fetch = FetchType.EAGER)
+	private List<String> roles = new ArrayList<String> ();
+	
+	public List<String> getRoles() {
+		return this.roles;
+	}
+	
+	public void SetRoles(List<String> roles) {
+		this.roles = roles;
+	}
+	
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		return this.roles.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList());
+	}
+
+	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+	@Override
+	public String getPassword() {
+		return this.password;
+	}
+
+	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+	@Override
+	public String getUsername() {
+		return this.userId;
+	}
+
+	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+	@Override
+	public boolean isAccountNonExpired() {
+		return true;
+	}
+
+	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+	@Override
+	public boolean isAccountNonLocked() {
+		return true;
+	}
+
+	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return true;
+	}
+
+	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+	@Override
+	public boolean isEnabled() {
+		return true;
+	}
+}
+```
 ### 추천 알고리즘 개발
 #### 최초 아이디어
 ##### 알고리즘
