@@ -437,9 +437,11 @@ $ gradlew bootRun
 - 추천 API에서 Program code를 출력하는 것이 요구사항이므로 Program table에 prog_code column 추가
 	- unique가 보장되어야 하는 code이므로 MD5 Hash를 이용하여 생성
 		- MD5 seed : Program 이름 + Program 테마 + Program 지역이름 + Program 설명 + Program 상세 설명
+- Region의 code 값을 Region table의 PK로 설정
+	- 요구사항에 region_code에 대한 특별한 형식 제약이 없었고
+	- ECO_TOUR_PROGRAM table과 join에 활용되므로 string보다 숫자를 활용
 ![Alt text](/md_img/program_erd.jpg)
-- EcoTourProgram의 region과 Region을 @ManyToOne으로 연결
-	- 특정 지역에 여러 Program이 존재 가능하므로
+
 ``` java
 @Entity
 public class EcoTourProgram {
@@ -555,7 +557,22 @@ public class User implements UserDetails {
 6. 5번의 목록을 내림차순 정렬
 7. 6번의 목록에서 첫번째 문서 추천
 ### JWT 활용
-- Access Token / Refresh Token 설명
+- JWT (Json Web Token): token을 통해 사용자 인증을 하기 위한 기술
+#### Access Token
+- 사용자 요청시 특정 expire time을 가지는 token을 return
+- 사용자는 해당 token을 API 호출시 X-AUTH-TOKEN header에 추가하여 호출
+- Filter에서 X-AUTH-TOKEN 을 검사하여 사용자 인증 여부 판단
+	- 인증 실패시 403 Forbidden 호출
+	- 내부적으로는 SignInFailedException이라는 Custom Exception을 정의하여 throw
+#### Refresh Token
+- 사용자의 Access Token이 유효기간이 지났을 경우 사용자는 Token을 refresh 시도
+- 이때 이미 Access Token이 유효하지 않은 상황이므로, 최초 signin 시 두가지 token을 발행
+	- Access Token: API 사용시 인증에 활용, 유효기간이 짧음
+	- Refresh Token: Access Token을 refresh하기 위해 사용, 유효기간이 상대적으로 길다.
+- Access Token이 만료되면 사용자는 refresh API를 통해 Refresh Token을 header에 담아 호출
+	- Header 정보
+		- Authorization : Bearer {refresh token}
+- 새롭게 발급받은 token으로 사용자는 다시 API 사용
 ## 발전 방향
 ### 개인화 추천 기능 추가
 - JWT를 통한 인증 및 로그인 기능과 연동하여, 개인의 추천 keyword 내역을 이용한 개인화 추천 알고리즘
