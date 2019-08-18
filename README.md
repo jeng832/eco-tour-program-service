@@ -141,6 +141,11 @@ $ gradlew bootRun
         - Content-Type : application/json
     - Body
         - region: 서비스 지역
+>```
+>{
+>  "region": "평창군"
+>}
+>```
 - Response
     - Status: 200 OK
     - Body
@@ -180,6 +185,48 @@ $ gradlew bootRun
 >    }
 >]
 >```
+
+
+#### 지역 code로 Program 검색 API
+- Request
+    - method: GET
+    - URI
+        - /program/region/code/{regionCode}
+        - {regionCode}: 지역 code
+    - Header
+        - X-AUTH-TOKEN : {access token}
+        - {access token}: 사용자 인증을 통해 획득한 access token
+- Response
+    - Status: 200 OK
+    - Body
+        - List
+            - id: Program ID
+            - name: Program 이름
+            - theme: Program 테마
+            - introduction: 프로그램 소개
+            - description: 프로그램 상세 소개
+>```
+>[
+>    {
+>        "id": 104,
+>        "name": "복잡한 일상을 떠나 자연과 하나되는 기운충전 여행(1박2일)",
+>        "theme": "아동·청소년 체험학습,",
+>        "region": "충청북도 보은군 속리산면 상판리 법주사로 84",
+>        "introduction": "수려한 속리산국립공원 탐방과 함께 흥미로운 체험활동이 어우러진 프로그램",
+>        "description": "오리숲 탐방 및 법주사 문화해설, 야행성 생물관찰, 천연염색 체험, 기마체험, 너나들이, 서바이벌 게임 등"
+>    },
+>    {
+>        "id": 105,
+>        "name": "햇빛 한 모금 바람 한 줄기도 소중한 속리산 휴식여행(2박3일형)",
+>        "theme": "아동·청소년 체험학습,",
+>        "region": "충청북도 보은군 속리산면 상판리 법주사로 84",
+>        "introduction": "청주지역의 다양한 문화재들 및 속리산국립공원 탐방과 함께 다양한 체험이 어우러진 프로그램",
+>        "description": "너나들이(2회), 환경빙고, 도미노 게임\r 캠프파이어, 레크레이션"
+>    }
+>]
+>```
+
+
 #### 프로그램 소개에 Keyword 포함하는 서비스 지역 개수 출력 API
 - Request
     - method: GET
@@ -191,6 +238,11 @@ $ gradlew bootRun
         - Content-Type : application/json
     - Body
         - keyword: 입력 keyword
+>```
+>{
+>  "keyword": "자연"
+>}
+>```
 - Response
     - Status: 200 OK
     - Body
@@ -260,6 +312,41 @@ $ gradlew bootRun
 >    "program": "e83fe5862ca8da42fcfae1aa33c75e40"
 >}
 >```
+
+#### Top K개 지역별 추천 프로그램 출력 API
+- Request
+    - method: GET
+    - URI
+        - /program/recommendation/topk/{topk}
+        - {topk}: 추천 갯수
+    - Header
+        - X-AUTH-TOKEN : {access token}
+        - {access token} : 사용자 인증을 통해 획득한 access token
+        - Content-Type : application/json
+    - Body
+        - region: 지역 이름
+        - keyword: 입력 keyword
+>```
+>{
+>   "region":"태안",
+>   "keyword":"자연"
+>}
+>```
+- Response
+    - Status: 200 OK
+    - Body
+        - program: Program code
+>```
+>[
+>    {
+>        "program": "a9ce17b86efc2fdce015505646a0bc8f"
+>    },
+>    {
+>        "program": "0dbcd284fb7e0c70dc28be35e211d8bd"
+>    }
+>]
+>```
+
 ### Project package 구조
 ```
 .
