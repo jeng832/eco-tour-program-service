@@ -36,6 +36,8 @@ $ gradlew bootRun
 - Komoran 형태소 분석기
 - h2database
 - apache-commons
+### API 명세
+
 ### Project package 구조
 ```
 .
@@ -43,25 +45,25 @@ $ gradlew bootRun
 │   └── com
 │       └── kakaopay
 │           └── ecotour
-│               ├── config
-│               ├── controller
+│               ├── config                      // 각종 Config 객체
+│               ├── controller                  // API Controller
 │               ├── dao
-│               │   ├── entity
-│               │   └── repository
-│               ├── exception
-│               │   └── handle
-│               ├── filter
-│               ├── manager
-│               │   └── impl
-│               ├── model
-│               │   ├── auth
-│               │   ├── http
-│               │   └── recomm
-│               ├── provider
-│               ├── service
-│               │   └── impl
-│               └── util
-└── resources
+│               │   ├── entity                  // JPA Entity
+│               │   └── repository              // JPA Repository
+│               ├── exception                   // Custom Exception 정의
+│               │   └── handle                  // Exception handler
+│               ├── filter                      // 사용자 Auth를 위한 filter
+│               ├── manager                     // Manager interface 위치
+│               │   └── impl                    // Manager 구현
+│               ├── model
+│               │   ├── auth                    // 인증관련 DTO
+│               │   ├── http                    // http response, request body 객체
+│               │   └── recomm                  // 추천 관련 DTO
+│               ├── provider                    // 인증 Token Provider
+│               ├── service                     // API 서비스 interface
+│               │   └── impl                    // API 서비스 구현
+│               └── util                        // 간편 기능 제공용 util
+└── resources                                   // properties 파일, csv파일 등 resource
 ```
 ### Project Block Diagram
 ## 문제해결 전략
