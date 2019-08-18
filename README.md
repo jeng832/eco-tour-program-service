@@ -18,7 +18,6 @@
 - TF-IDF 방식의 추천 알고리즘 개발
 - Top-K개의 프로그램 추천할 수 있도록 확장
 - Access Token과 Refresh Token을 이용한 Token 인증 체계 개발
-- 실제 개발/운영계 분리 환경을 고려한 개발
 - Java의 함수형 언어적 특징 적극 활용(Lambda, Optional, forEach 등)
 ## 빌드 및 실행 방법
 ### Ubuntu
