@@ -429,6 +429,57 @@ $ gradlew bootRun
 ![Alt text](/md_img/blockdiagram.jpg)
 ## 문제해결 전략
 ### ORM Entity 구조
+#### Program과 Region 정보 ER Diagram
+![Alt text](/md_img/program_erd.jpg)
+```
+@Entity
+public class EcoTourProgram {
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="id", nullable = false)
+	private Long id;
+	@Column(name="name", nullable = false)
+	private String name;
+	@Column(name="theme", nullable = false)
+	private String theme;
+	
+	@ManyToOne(targetEntity = Region.class, fetch = FetchType.EAGER)
+	@JoinColumn(name="code")
+	private Region region;
+
+	@Column(name="introduction")
+	private String introduction;
+	@Column(name="description", length = 500)
+	private String description;
+	
+	@Column(name="prog_code", nullable = false)
+	private String progCode;
+	@Column(name="created_time")
+	@CreationTimestamp
+	private Timestamp createdTime;
+	@Column(name="modified_time")
+	@UpdateTimestamp
+	private Timestamp modifiedTime;
+	
+            '''
+            
+}
+```
+```
+@Entity
+public class Region {
+	@Id
+	@GeneratedValue(strategy=GenerationType.TABLE)
+	@Column(name = "code")
+	private Long code;
+	@Column(name = "region_name")
+	private String regionName;
+	
+            '''
+}
+```
+#### 사용자 정보 ER Diagram
+![Alt text](/md_img/user_erd.jpg)
 ### 추천 알고리즘 개발
 #### 최초 아이디어
 ##### 알고리즘
