@@ -37,12 +37,229 @@ $ gradlew bootRun
 - h2database
 - apache-commons
 ### API 
-종류|method|Request URI<br>Header|Request Body|Response|Description
-----|------|-----------|------------|-------------|-----------
-Health Check|GET|/health|||Server Health Check
-initialize data|GET|/init|||주어진 CSV파일을 DB에 저장하여 초기화
-program 조회|GET|/program/id/{progId}<br>X-AUTH-TOKEN:{access token}||{<br>  "description": "string",<br>  "id": 0,<br>  "introduction": "string",<br>  "name": "string",<br>  "region": "string",<br>  "theme": "string"<br>}|{progId} : program ID<br>{access token} : 인증을 통해 획득한 access token
+#### Health Check
+- server health check API
+- Request
+    - method: GET
+    - URI: /health
+- Response
+    - Status: 200 OK
+#### initialize data
+- 저장된 csv파일을 읽어들여서 DB에 저장하는 API
+- Request
+    - method: GET
+    - URI: /init
+- Response
+    - Status: 200 OK
+#### Program 조회 API
+- 저장된 생태 관광 프로그램 조회
+- Request
+    - method: GET
+    - URI
+        - /program/{progId}
+        - {progId}: 조회하고자 하는 Program ID
+    - Header
+        - X-AUTH-TOKEN : {access token}
+        - {access token}: 사용자 인증을 통해 획득한 access token
+- Response
+    - Status: 200 OK
+    - Body:
+        - id: program ID
+        - name: program 이름
+        - theme: program 테마
+        - region: 서비스 지역
+        - introduction: 프로그램 소개
+        - description: 프로그램 상세 소개
+>```        
+>{
+>    "id": 1,
+>    "name": "자연과 문화를 함께 즐기는 설악산 기행",
+>    "theme": "문화생태체험,자연생태체험,",
+>    "region": "강원도 속초",
+>    "introduction": "설악산 탐방안내소, 신흥사, 권금성, 비룡폭포",
+>    "description": "설악산은 왜 설악산이고, 신흥사는 왜 신흥사일까요? 설악산에 대해 정확히 알고, 배우고, 느낄 수 있는 당일형 생태관광입니다."
+>}
+>```
+#### Program 추가 API
+- 신규 프로그램 추가
+- Request
+    - method: POST
+    - URI
+        - /program
+    - Header
+        - X-AUTH-TOKEN : {access token}
+        - {access token}: 사용자 인증을 통해 획득한 access token
+        - Content-Type : application/json
+    - Body
+        - name: program 이름
+        - theme: program 테마
+        - region: 서비스 지역
+        - introduction: 프로그램 소개
+        - description: 프로그램 상세 소개
+- Response
+    - Status: 200 OK
+#### Program 수정 API
+- 기존 프로그램 수정
+- Request
+    - method: PUT
+    - URI
+        - /program/{progId}
+        - {progId}: 변경하고자 하는 program ID
+    - Header
+        - X-AUTH-TOKEN : {access token}
+        - {access token}: 사용자 인증을 통해 획득한 access token
+        - Content-Type : application/json
+    - Body
+        - name: program 이름
+        - theme: program 테마
+        - region: 서비스 지역
+        - introduction: 프로그램 소개
+        - description: 프로그램 상세 소개
+- Response
+    - Status: 200 OK
+#### Program 삭제 API
+- 기존 프로그램 삭제
+- Request
+    - method: DELETE
+    - URI
+        - /program/{progId}
+        - {progId}: 변경하고자 하는 program ID
+    - Header
+        - X-AUTH-TOKEN : {access token}
+        - {access token}: 사용자 인증을 통해 획득한 access token
+- Response
+    - Status: 200 OK
+#### 특정 지역 Program 검색 API
+- 특정 지역 Program 검색
+- Request
+    - method: GET
+    - URI
+        - /program/region/name
+    - Header
+        - X-AUTH-TOKEN : {access token}
+        - {access token}: 사용자 인증을 통해 획득한 access token
+        - Content-Type : application/json
+    - Body
+        - region: 서비스 지역
+- Response
+    - Status: 200 OK
+    - Body
+        - List
+            - region: 지역 code
+            - programs
+                - List
+                    - prgm_name: 프로그램 이름
+                    - theme: 프로그램 테마
+>```
+>[
+>    {
+>        "region": 36,
+>        "programs": [
+>            {
+>                "prgm_name": "(1박2일)자연으로 떠나는 행복여행",
+>                "theme": "문화생태체험,자연생태체험,"
+>            },
+>            {
+>                "prgm_name": "오대산국립공원 힐링캠프",
+>                "theme": "숲 치유,"
+>            },
+>            {
+>                "prgm_name": "소금강 지역문화 체험",
+>                "theme": "자연생태,"
+>            }
+>        ]
+>    },
+>    {
+>        "region": 59,
+>        "programs": [
+>            {
+>                "prgm_name": "오감만족! 오대산 에코 어드벤처 투어",
+>                "theme": "아동·청소년 체험학습"
+>            }
+>        ]
+>    }
+>]
+>```
+#### 프로그램 소개에 Keyword 포함하는 서비스 지역 개수 출력 API
+- Request
+    - method: GET
+    - URI
+        - /count/program/from_intro
+    - Header
+        - X-AUTH-TOKEN : {access token}
+        - {access token}: 사용자 인증을 통해 획득한 access token
+        - Content-Type : application/json
+    - Body
+        - keyword: 입력 keyword
+- Response
+    - Status: 200 OK
+    - Body
+        - keyword: 입력 keyword
+        - programs
+                - List
+                    - region: 지역이름
+                    - count: 등장 지역 갯수
+>```
+>{
+>    "keyword": "세계문화유산",
+>    "programs": [
+>        {
+>            "region": "경상북도 경주시",
+>            "count": 2
+>        }
+>    ]
+>}
+>```
+#### 프로그램 상세 정보에 Keyword 출현 빈도 계산 API
+- Request
+    - method: GET
+    - URI
+        - /count/keyword/from_desc
+    - Header
+        - X-AUTH-TOKEN : {access token}
+        - {access token}: 사용자 인증을 통해 획득한 access token
+        - Content-Type : application/json
+    - Body
+        - keyword: 입력 keyword
+- Response
+    - Status: 200 OK
+    - Body
+        - keyword: 입력 keyword
+        - count: 등장 횟수
+>```
+>{
+>    "keyword": "자연",
+>    "count": 79
+>}
+>```
 
+#### 지역별 추천 프로그램 출력 API
+- Request
+    - method: GET
+    - URI
+        - /program/recommendation
+    - Header
+        - X-AUTH-TOKEN : {access token}
+        - {access token}: 사용자 인증을 통해 획득한 access token
+        - Content-Type : application/json
+    - Body
+        - region: 지역 이름
+        - keyword: 입력 keyword
+>```
+>{
+>   "region":"강원",
+>   "keyword":"여행"
+>}
+>```
+- Response
+    - Status: 200 OK
+    - Body
+        - program: Program code
+>```
+>{
+>    "program": "e83fe5862ca8da42fcfae1aa33c75e40"
+>}
+>```
 ### Project package 구조
 ```
 .
