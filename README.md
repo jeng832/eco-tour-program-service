@@ -428,8 +428,15 @@ $ gradlew bootRun
 ### Project Block Diagram
 ![Alt text](/md_img/blockdiagram.jpg)
 ## 문제해결 전략
-### ORM Entity 구조
+### JPA통한 ORM 구성
 #### Program과 Region 정보 ER Diagram
+- Program과 Region정보(지역이름, 지역code)를 한 table로 구성할 경우 1차 정규화 대상
+	- 따라서 지역 정보의 중복을 최소화 하기 위해서 table분리가 필요
+- Business Logic상 Program은 특정 지역에 속해 있고, 특정 지역은 여러개의 Program을 개최할 수 있다.
+	- 따라서 Program기준으로 @ManyToOne 관계
+- 추천 API에서 Program code를 출력하는 것이 요구사항이므로 Program table에 prog_code column 추가
+	- unique가 보장되어야 하는 code이므로 MD5 Hash를 이용하여 생성
+		- MD5 seed : Program 이름 + Program 테마 + Program 지역이름 + Program 설명 + Program 상세 설명
 ![Alt text](/md_img/program_erd.jpg)
 - EcoTourProgram의 region과 Region을 @ManyToOne으로 연결
 	- 특정 지역에 여러 Program이 존재 가능하므로
@@ -481,6 +488,8 @@ public class Region {
 }
 ```
 #### 사용자 정보 ER Diagram
+- 사용자 signup 정보 저장 및 Role 저장
+- Password 는 encoding 된 값으로 저장
 ![Alt text](/md_img/user_erd.jpg)
 
 ``` java
@@ -502,62 +511,7 @@ public class User implements UserDetails {
 	
 	@ElementCollection(fetch = FetchType.EAGER)
 	private List<String> roles = new ArrayList<String> ();
-	
-	public List<String> getRoles() {
-		return this.roles;
-	}
-	
-	public void SetRoles(List<String> roles) {
-		this.roles = roles;
-	}
-	
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	
-	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return this.roles.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList());
-	}
-
-	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-	@Override
-	public String getPassword() {
-		return this.password;
-	}
-
-	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-	@Override
-	public String getUsername() {
-		return this.userId;
-	}
-
-	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-	@Override
-	public boolean isAccountNonExpired() {
-		return true;
-	}
-
-	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-	@Override
-	public boolean isAccountNonLocked() {
-		return true;
-	}
-
-	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-	@Override
-	public boolean isCredentialsNonExpired() {
-		return true;
-	}
-
-	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-	@Override
-	public boolean isEnabled() {
-		return true;
-	}
+            '''	
 }
 ```
 ### 추천 알고리즘 개발
