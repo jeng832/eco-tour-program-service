@@ -347,6 +347,56 @@ $ gradlew bootRun
 >]
 >```
 
+#### 회원 가입 API
+- Request
+    - method: GET
+    - URI
+        - /auth/signup?id={id}&password={password}
+        - {id}: 사용자 id
+        - {password}: 사용자 password
+- Response
+    - 가입 완료
+        - Status: 200 OK
+    - 가입 거절
+        - Status: 403 Forbidden
+
+#### Token 발급 API
+- Request
+    - method: GET
+    - URI
+        - /auth/signin?id={id}&password={password}
+        - {id}: 사용자 id
+        - {password}: 사용자 password
+- Response
+    - 발급 완료
+        - Status: 200 OK
+        - Body
+            - access_token: API 사용시 Header에 추가하여 인증하기 위한 token, 유효기간을 상대적으로 짧게 설정
+            - refresh_token: Token 재발행을 목적으로 하는 token, 유효기간을 상대적으로 길게 설정
+    - 발급 거절
+        - Status: 403 Forbidden
+
+#### Token refresh API
+- Request
+    - method: GET
+    - URI
+        - /auth/refresh?id={id}&password={password}
+        - {id}: 사용자 id
+        - {password}: 사용자 password
+    - Header
+        - Authorization : Bearer {refresh token}
+        - {refresh token}: 발급된 refresh token
+- Response
+    - 발급 완료
+        - Status: 200 OK
+        - Body
+            - access token: 재발급된 access token
+>```
+>eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1MSIsInJvbGVzIjpbIlJPTEVfVVNFUiJdLCJpYXQiOjE1NjYxNDA5MjQsImV4cCI6MTU2NjE0NDUyNH0.-bLzO_2MrkJ-Igb3nzRGyWC0GeSlUzF6OqjvO_rCJzI
+>```
+    - 발급 거절
+        - Status: 403 Forbidden
+
 ### Project package 구조
 ```
 .
