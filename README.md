@@ -426,7 +426,7 @@ $ gradlew bootRun
 └── resources                                   // properties 파일, csv파일 등 resource
 ```
 ### Project Block Diagram
-
+![Alt text](/md_img/blockdiagram.jpg)
 ## 문제해결 전략
 ### ORM Entity 구조
 ### 추천 알고리즘 개발
