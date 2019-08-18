@@ -36,7 +36,11 @@ $ gradlew bootRun
 - Komoran 형태소 분석기
 - h2database
 - apache-commons
-### API 명세
+### API 
+종류|method|URI|Header|Request Body|Response code|Response Body|Description
+----|------|---|------|------------|-------------|-------------|-----------
+Health Check|GET|/health|||200||Server Health Check
+initialize data|GET|/init|||200||주어진 CSV파일을 DB에 저장하여 초기화
 
 ### Project package 구조
 ```
