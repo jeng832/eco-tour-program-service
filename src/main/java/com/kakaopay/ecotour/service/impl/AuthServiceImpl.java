@@ -7,6 +7,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.kakaopay.ecotour.exception.SignInFailedException;
 import com.kakaopay.ecotour.exception.TokenRefreshFailedException;
 import com.kakaopay.ecotour.manager.DataManager;
 import com.kakaopay.ecotour.model.auth.GetSignInResponseBody;
@@ -30,7 +31,9 @@ public class AuthServiceImpl implements AuthService {
 	@Override
 	public GetSignInResponseBody signin(String id, String password) {
 		SignInUserData userData = dataMgr.getUserData(id);
-		
+		if(!passwordEncoder.matches(password, userData.getEncodedPassword())) {
+			throw new SignInFailedException();
+		}
 		String access = jwtTokenProvider.createToken(id, userData.getRoles());
 		String refresh = jwtTokenProvider.refreshToken(id, userData.getRoles());
 		return new GetSignInResponseBody(access, refresh);
@@ -38,7 +41,6 @@ public class AuthServiceImpl implements AuthService {
 
 	@Override
 	public void signup(String id, String password) {
-		
 		dataMgr.saveUser(id, passwordEncoder.encode(password));
 	}
 

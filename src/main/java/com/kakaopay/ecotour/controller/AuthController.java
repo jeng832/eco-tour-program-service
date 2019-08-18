@@ -37,7 +37,7 @@ public class AuthController {
 	@RequestMapping(value="/signup", method=RequestMethod.GET)
 	public ResponseEntity<?> signup(@RequestParam String id, @RequestParam String password) {
 		logger.info("signin id: " + id);
-		authService.signup(id, password);;
+		authService.signup(id, password);
 		
 		return ResponseEntity.ok().build();
 	}
