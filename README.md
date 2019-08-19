@@ -99,6 +99,15 @@ $ ./gradlew bootRun
         - region: 서비스 지역
         - introduction: 프로그램 소개
         - description: 프로그램 상세 소개
+>```
+>{
+>  "description": "프로그램 description",
+>  "introduction": "소개소개소개",
+>  "name": "프로그램 이름",
+>  "region": "강원도 동해",
+>  "theme": "여행"
+>}
+>```
 - Response
     - Status: 200 OK
 #### Program 수정 API
