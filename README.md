@@ -264,6 +264,7 @@ $ ./gradlew bootRun
                 - List
                     - region: 지역이름
                     - count: 등장 지역 갯수
+
 >```
 >{
 >    "keyword": "세계문화유산",
@@ -293,7 +294,7 @@ $ ./gradlew bootRun
         - count: 등장 횟수
 >```
 >{
->    "keyword": "자연",
+>    "keyword": "세계문화유산",
 >    "count": 79
 >}
 >```
