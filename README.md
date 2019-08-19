@@ -420,7 +420,7 @@ $ ./gradlew bootRun
 >eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1MSIsInJvbGVzIjpbIlJPTEVfVVNFUiJdLCJpYXQiOjE1NjYxNDA5MjQsImV4cCI6MTU2NjE0NDUyNH0.-bLzO_2MrkJ-Igb3nzRGyWC0GeSlUzF6OqjvO_rCJzI
 >```
 
-    - 발급 
+    - 발급 거절
         - Status: 403 Forbidden
 
 ### Project package 구조
