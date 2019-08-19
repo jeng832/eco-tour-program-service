@@ -379,7 +379,7 @@ $ ./gradlew bootRun
     - 가입 거절
         - Status: 403 Forbidden
 
-#### Token 발급 API
+#### Login (Token 발급) API
 - Request
     - method: GET
     - URI
@@ -392,6 +392,12 @@ $ ./gradlew bootRun
         - Body
             - access_token: API 사용시 Header에 추가하여 인증하기 위한 token, 유효기간을 상대적으로 짧게 설정
             - refresh_token: Token 재발행을 목적으로 하는 token, 유효기간을 상대적으로 길게 설정
+>```
+>{
+>    "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1MSIsInJvbGVzIjpbIlJPTEVfVVNFUiJdLCJpYXQiOjE1NjYyMjIxNDAsImV4cCI6MTU2NjIyNTc0MH0.mkfh-lsMC7uLqOPGwHTW5YdFe4Ac5XzmaMQCVcisaco",
+>    "refresh_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1MSIsInJvbGVzIjpbIlJPTEVfVVNFUiJdLCJpYXQiOjE1NjYyMjIxNDAsImV4cCI6MTU2NjIzMjk0MH0.9pWhGwLiEPLd2B_TS22myMacyfqfIxReTqJNcY9zOpI"
+>}
+>```
     - 발급 거절
         - Status: 403 Forbidden
 
