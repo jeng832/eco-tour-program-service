@@ -14,7 +14,7 @@
     - [x] signup: 계정생성
     - [x] signin: 로그인
     - [x] refresh: Token 갱신
-#### 개인적 목표
+#### 개인적 Objective
 - [x] TF-IDF 방식의 추천 알고리즘 개발
 - [x] Top-K개의 프로그램 추천할 수 있도록 확장
 - [x] Access Token과 Refresh Token을 이용한 Token 인증 체계 개발
