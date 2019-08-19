@@ -215,7 +215,7 @@ $ ./gradlew bootRun
             - id: Program ID
             - name: Program 이름
             - theme: Program 테마
-	    - region: Program 지역 이름
+            - region: Program 지역 이름
             - introduction: 프로그램 소개
             - description: 프로그램 상세 소개
 >```
