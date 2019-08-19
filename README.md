@@ -540,6 +540,13 @@ public class User implements UserDetails {
     4. 문서별 개별 Term의 TF-IDF 값 계산
 2. column 별 입력받은 Keyword에 해당하는 TF-IDF 값 추출
 3. 2번의 값에 column별 weight 곱
+	- column별 weight는 application.properties 파일에 저장
+	```
+	# recommendation weight (0.0 ~ 1.0)
+	recomm.weight.theme=0.9
+	recomm.weight.intro=0.85
+	recomm.weight.desc=0.8
+	```
 4. 3번으로 나온 3개의 weighted TF-IDF를 합
 5. 입력받은 keyword에 해당하는 Weighted TF-IDF 추출
 6. 5번의 Weighted TF-IDF를 내림차순 정렬
