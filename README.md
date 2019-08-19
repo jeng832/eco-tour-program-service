@@ -516,7 +516,6 @@ public class Region {
 #### 사용자 정보 ER Diagram
 - 사용자 signup 정보 저장 및 Role 저장
 - Password 는 encoding 된 값으로 저장
-![Alt text](/md_img/user_erd.jpg)
 
 ``` java
 @Entity
