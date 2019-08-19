@@ -419,10 +419,12 @@ $ ./gradlew bootRun
 >```
 >eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1MSIsInJvbGVzIjpbIlJPTEVfVVNFUiJdLCJpYXQiOjE1NjYxNDA5MjQsImV4cCI6MTU2NjE0NDUyNH0.-bLzO_2MrkJ-Igb3nzRGyWC0GeSlUzF6OqjvO_rCJzI
 >```
-    - 발급 거절
+
+    - 발급 
         - Status: 403 Forbidden
 
 ### Project package 구조
+
 ```
 .
 ├── java
@@ -451,6 +453,14 @@ $ ./gradlew bootRun
 ```
 ### Project Block Diagram
 ![Alt text](/md_img/blockdiagram.jpg)
+- Authentication Filter: 인증 관련, Header 확인, Token 유효성 검증
+- API Controller: API 기능별 정의
+- Auth Controller: 인증관련(가입, 로그인, Token 재발행) API 정의
+- API Service: API 별 동작 service
+- Auth Service: 인증관련 API 동작 service
+- Data Manager: Data 저장, 처리 관련 개별 기능 수행
+- Recommendation Manager: 추천 알고리즘 동작
+- Token Provider: Token 관리 및 인증 관련 기능 수행
 ## 문제해결 전략
 ### JPA통한 ORM 구성
 #### Program과 Region 정보 ER Diagram
