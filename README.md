@@ -25,7 +25,7 @@
 ### Ubuntu
 ```
 $ chmod +x gradlew
-$ gradlew bootRun
+$ ./gradlew bootRun
 ```
 ### Windows
 ```
