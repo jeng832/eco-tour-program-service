@@ -587,7 +587,7 @@ public class User implements UserDetails {
 - 입력받은 keyword가 복합어(ex: 생태체험) 일 경우, 추천의 Source data는 Term별로 분해(생태 + 체험)가 되어서 추천하지 못하는 문제 발생
 ##### 해결방법
 - 입력받은 keyword도 동일한 형태소 분석기로 Term을 추출하여, 개별 Term에 대해서 추천 알고리즘 활용하고 이를 총합하여 추천
-#### TF-IDF 활용한 추천 알고리즘
+#### 복합어 keyword 지원, TF-IDF 활용한 추천 알고리즘
 ##### 알고리즘
 1. 위의 TF-IDF를 이용한 추천 알고리즘 4번 까지 수행
 2. 입력받은 keyword를 형태소 분석
