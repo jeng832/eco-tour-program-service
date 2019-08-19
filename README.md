@@ -540,7 +540,7 @@ public class User implements UserDetails {
     4. 문서별 개별 Term의 TF-IDF 값 계산
 2. column 별 입력받은 Keyword에 해당하는 TF-IDF 값 추출
 3. 2번의 값에 column별 weight 곱
-	- column별 weight는 application.properties 파일에 저장
+	- column별 weight는 application.properties 파일에 저장(0.0 이상, 1.0 이하의 값)
 	```
 	# recommendation weight (0.0 ~ 1.0)
 	recomm.weight.theme=0.9
