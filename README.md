@@ -570,7 +570,7 @@ public class User implements UserDetails {
 - 사용자 요청시 특정 expire time을 가지는 token을 return
 - 사용자는 해당 token을 API 호출시 X-AUTH-TOKEN header에 추가하여 호출
 - Filter에서 X-AUTH-TOKEN 을 검사하여 사용자 인증 여부 판단
-	- 인증 실패시 403 Forbidden 호출
+	- 인증 실패시 403 Forbidden 응답
 	- 내부적으로는 SignInFailedException이라는 Custom Exception을 정의하여 throw
 #### Refresh Token
 - 사용자의 Access Token이 유효기간이 지났을 경우 사용자는 Token을 refresh 시도
@@ -580,6 +580,7 @@ public class User implements UserDetails {
 - Access Token이 만료되면 사용자는 refresh API를 통해 Refresh Token을 header에 담아 호출
 	- Header 정보
 		- Authorization : Bearer {refresh token}
+	- 인증 실패시 403 Forbidden 응답
 - 새롭게 발급받은 token으로 사용자는 다시 API 사용
 ## 발전 방향
 ### 개인화 추천 기능 추가
