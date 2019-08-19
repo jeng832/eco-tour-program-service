@@ -24,7 +24,7 @@
 ## 빌드 및 실행 방법
 ### Ubuntu
 ```
-$ 
+$ chmod +x gradlew
 $ gradlew bootRun
 ```
 ### Windows
