@@ -24,6 +24,7 @@
 ## 빌드 및 실행 방법
 ### Ubuntu
 ```
+$ 
 $ gradlew bootRun
 ```
 ### Windows
