@@ -253,7 +253,7 @@ $ ./gradlew bootRun
         - keyword: 입력 keyword
 >```
 >{
->  "keyword": "자연"
+>  "keyword": "세계문화유산"
 >}
 >```
 - Response
@@ -287,6 +287,11 @@ $ ./gradlew bootRun
         - Content-Type : application/json
     - Body
         - keyword: 입력 keyword
+>```
+>{
+>    "keyword": "자연"
+>}
+>```
 - Response
     - Status: 200 OK
     - Body
@@ -294,7 +299,7 @@ $ ./gradlew bootRun
         - count: 등장 횟수
 >```
 >{
->    "keyword": "세계문화유산",
+>    "keyword": "자연",
 >    "count": 79
 >}
 >```
