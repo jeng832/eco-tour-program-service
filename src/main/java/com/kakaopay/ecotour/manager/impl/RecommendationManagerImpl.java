@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 import javax.annotation.PostConstruct;
 
@@ -53,7 +55,7 @@ public class RecommendationManagerImpl implements RecommendationManager {
 		introductions = new ColumnStrings();
 		descriptions = new ColumnStrings();
 	
-		regionMap = new HashMap<Long, String> ();
+		regionMap = new ConcurrentHashMap<Long, String> ();
 	}
 	
 	private int getDocumentFreq(List<String> documents, String term) {
