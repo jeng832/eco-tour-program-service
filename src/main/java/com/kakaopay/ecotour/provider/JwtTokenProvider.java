@@ -29,8 +29,8 @@ public class JwtTokenProvider {
 	@Value("spring.jwt.refresh.secret")
 	private String refreshTokenSecretKey;
 
-	private long accessTokenValidInMs = 1000L * 60 * 5;   //1 min
-	private long refreshTokenValidInMs = 1000L * 60 * 20;   //10 min
+	private long accessTokenValidInMs = 1000L * 60 * 60;   //60 min
+	private long refreshTokenValidInMs = 1000L * 60 * 180;   //180 min
 	private final UserDetailsService userDetailsService;
 	
 	JwtTokenProvider(UserDetailsService userDetailsService) {

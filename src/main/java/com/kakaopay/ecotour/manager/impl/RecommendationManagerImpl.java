@@ -57,7 +57,14 @@ public class RecommendationManagerImpl implements RecommendationManager {
 	}
 	
 	private int getDocumentFreq(List<String> documents, String term) {
-		return StringUtil.countTerm(documents, term);
+		int count = 0;
+		for(String doc : documents) {
+			if(doc.contains(term)) {
+				count++;
+			}
+		}
+		
+		return count;
 	}
 	
 	private int getTermFreq(String document, String term) {
